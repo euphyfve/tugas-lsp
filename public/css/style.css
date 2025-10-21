@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "ubuntu", sans-serif;
+}
+
+.bodys {
+    background-color: rgb(76, 107, 107);
+}
+
+.headz {
+    background-color: rgb(30, 35, 30);
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    align-items: center;
+    border-bottom: 4px solid rgb(90, 89, 88);
+    z-index: 99;
+}
+
+.agra {
+    font-size: 2em;
+    user-select: none;
+    color: white;
+}
+
+.navs .menugra {
+    position: relative;
+    margin-left: 30px;
+    font-size: 1.2em;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+.navs .menugra.active {
+    border-bottom: 2.5px solid white;
+    padding-bottom: 3px;
+    color: wheat;
+    padding-left: 5px;
+}
+
+.navs .menugra::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    left: 0;
+    bottom: -6px;
+    margin-left: -2px;
+    transform-origin: right;
+    transition: transform 0.3s;
+    transform: scaleX(0);
+}
+
+.navs .menugra:not(.active):hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.butoski {
+    width: 120px;
+    height: 40px;
+    margin-left: 20px;
+    background: transparent;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1em;
+    border-radius: 6px;
+    border: 2px solid white;
+    transition: ease-in-out 0.3s;
+}
+
+.butoski:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.mainz {
+    margin-top: -11em;
+    padding: 20px 100px;
+    display: flex;
+    columns: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    height: 100vh;
+}
+
+.kesigmaanpubg {
+    height: 100px;
+}
+
+#formtambahinput {
+    color: white;
+    display: flex;
+    height: 40px;
+    gap: 10px;
+}
+
+#formtambahpenerbangan {
+    margin-top: 13em;
+}
+
+#sigmasubinput {
+    background-color: rgb(30, 35, 30);
+    border: none;
+    color: white;
+}
+
+#sigmaselections {
+    display: flex;
+    gap: 10px;
+}
+
+#infodalamtrx {
+    color: white;
+    font-weight: 600;
+}
+
+.nama-akun {
+    font-size: 1.2em;
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    margin-left: 25px;
+    border: 2px solid white;
+    padding: 6px;
+    background: transparent;
+    border-radius: 6px;
+    transition: ease-in-out 0.3s;
+}
+
+.nama-akun:hover {
+    background-color: white;
+    color: black;
+}
