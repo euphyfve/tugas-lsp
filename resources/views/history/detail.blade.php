@@ -1,135 +1,134 @@
 @extends('layouts.welcome')
 
-@section('linkcss')
-    <link rel="stylesheet" href="../../css/style.css">
-@endsection
-
 @section('judul')
-    History
+    History Detail
 @endsection
 
 @section('main-content')
 
-<div class="container" id="formtambahpenerbangan">
-    <div class="card p-2 col-md-6 mx-auto mt-4" style="background-color: rgb(30, 35, 30);">
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="mb-6">
+        <h2 class="text-3xl font-bold text-slate-800 mb-2">Detail Transaksi</h2>
+        <p class="text-slate-600">Informasi lengkap pemesanan tiket penerbangan</p>
+    </div>
 
-        <div class="card-header text-center" style="color: white; font-weight:600;"  >
-            <h2>Detail History</h2>
-        </div>
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
 
-        <div class="card-body">
+        @if (session('gagal'))
+            <div class="p-4 bg-red-50 border-l-4 border-red-500 rounded-r-lg mb-6">
+                <p class="text-sm text-red-700">{{ session('gagal') }}</p>
+            </div>
+        @endif
 
-            @if (session('gagal'))
-                <div class="alert alert-danger">
-                    {{ session('gagal') }}
-                </div>
-            @endif
-
-            <form method="post">
-
-
-                <input type="text" name="id" value="{{ $penerbangan->id }}" hidden>
-
-                {{-- nama maskapai --}}
-                <div class="mb-3" id="formtambahinput">
-                    <div class="input-group">
-                        <label class="input-group-text" for="inputGroupSelect01" id="sigmasubinput">Nama Maskapai &nbsp;</label>
-                        <input type="text" placeholder="Tujuan Akhir" name="Takhir" class="form-control @error('Takhir') is-invalid @enderror" value="{{ $penerbangan->invoice }}" id="exampleInputEmail1" aria-describedby="emailHelp" autocomplete="off" disabled>
-                        @error('Takhir')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="mb-3" id="formtambahinput">
-                    <div class="input-group">
-                        <label class="input-group-text" for="inputGroupSelect01" id="sigmasubinput">Tujuan &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                        <input type="text" placeholder="Tujuan Akhir" name="Takhir" class="form-control @error('Takhir') is-invalid @enderror" value="{{ $penerbangan->tujuan_akhir }}" id="exampleInputEmail1" aria-describedby="emailHelp" autocomplete="off" disabled>
-                        @error('Takhir')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="mb-3" id="formtambahinput">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01" id="sigmasubinput" >Keberangkatan </label>
-                    </div>
-                    <div class="sigma" style="width: 100%;">
-                        <input type="text" placeholder="{{ $penerbangan->keberangkatan }}" name="berangkat" class="form-control @error('berangkat') is-invalid @enderror" value="{{ $penerbangan->berangkat }}" id="exampleInputEmail1" aria-describedby="emailHelp" autocomplete="off" disabled>
-                        @error('berangkat')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
+        <div class="p-6 space-y-6">
 
 
-
-                {{-- bandara --}}
-                <div class="text-center mb-2" id="infodalamtrx">Informasi Bandara</div>
-
-                <div class="input-group mb-3" id="sigmaselections">
-                    <input type="text" placeholder="" name="bandara" class="form-control @error('bandara') is-invalid @enderror text-center" value="Bandara {{ $penerbangan->listBandara->nama }}" id="exampleInputEmail1" aria-describedby="emailHelp" autocomplete="off" disabled>
-                </div>
-
-                <div class="mb-3" id="formtambahinput">
-                    <div class="input-group mb-3" id="sigmaselections">
-                        <label class="input-group-text" for="inputGroupSelect01" id="sigmasubinput">Contact</label>
-                        <input type="text" placeholder="" name="contact" class="form-control @error('contact') is-invalid @enderror" value="{{ $penerbangan->listBandara->contact }}" id="exampleInputEmail1" aria-describedby="emailHelp" autocomplete="off" disabled>
-                    </div>
-
-                    <div class="input-group mb-3" id="sigmaselections">
-                        <label class="input-group-text" for="inputGroupSelect01" id="sigmasubinput">Lokasi</label>
-                        <input type="text" placeholder="" name="lokbandara" class="form-control @error('lokbandara') is-invalid @enderror" value="{{ $penerbangan->listBandara->lokasi }}" id="exampleInputEmail1" aria-describedby="emailHelp" autocomplete="off" disabled>
-                    </div>
-                </div>
-
-
-
-                {{-- info lainnya --}}
-
-                <div class="mb-3" id="formtambahinput">
-                    <div class="input-group">
-                        <input type="number" name="seat" placeholder="{{ $penerbangan->seat }} seat" disabled class="form-control @error('seat') is-invalid @enderror"  value="{{ old('seat') }}" id="seatsigma" autocomplete="off" required>
-                        @error('seat')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-
-                    <select name="class" class="custom-select form-control" disabled id="klas" required>
-                            <option>{{ $penerbangan->class }}</option>
-                    </select>
-                </div>
-
-                <input type="number" oninput="sum()" name="hargawal" value="{{ $penerbangan->harga }}" id="hargawal" hidden>
-
-                <div class="mb-3" id="formtambahinput">
-                    <div class="input-group">
-                        <label class="input-group-text" for="inputGroupSelect01" id="sigmasubinput">Harga &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                        <input type="number" placeholder="Rp {{ $penerbangan->total }}" name="harga" class="form-control @error('harga') is-invalid @enderror" id="inputsigma" aria-describedby="emailHelp" autocomplete="off" disabled>
-                        @error('harga')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+            <!-- Flight Information -->
+            <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-6 mb-6">
+                <h3 class="text-lg font-semibold text-slate-800 mb-4 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                    </svg>
+                    Informasi Penerbangan
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">Invoice / Maskapai</label>
+                        <div class="bg-white rounded-lg px-4 py-3 text-slate-800 font-semibold">
+                            {{ $penerbangan->invoice }}
                         </div>
-                        @enderror
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">Tujuan Akhir</label>
+                        <div class="bg-white rounded-lg px-4 py-3 text-slate-800">
+                            {{ $penerbangan->tujuan_akhir }}
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="mx-auto d-flex justify-content-center gap-3" >
-                    <a href="{{ route('history.index') }}" class="btn btn-danger"> Back </a>
+            <!-- Departure Info -->
+            <div>
+                <label class="block text-sm font-medium text-slate-600 mb-2">Waktu Keberangkatan</label>
+                <div class="bg-slate-50 rounded-lg px-4 py-3 flex items-center">
+                    <svg class="w-5 h-5 text-slate-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span class="text-slate-800 font-medium">{{ $penerbangan->keberangkatan }} - {{ $penerbangan->berangkat }}</span>
                 </div>
-            </form>
-        </div>
+            </div>
 
+
+
+            <!-- Airport Information -->
+            <div class="bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-6">
+                <h3 class="text-lg font-semibold text-slate-800 mb-4 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                    </svg>
+                    Informasi Bandara
+                </h3>
+                <div class="bg-white rounded-lg p-4 mb-3">
+                    <div class="text-center text-lg font-bold text-slate-800 mb-3">
+                        Bandara {{ $penerbangan->listBandara->nama }}
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">Contact</label>
+                            <div class="bg-slate-50 rounded px-3 py-2 text-slate-800">
+                                {{ $penerbangan->listBandara->contact }}
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">Lokasi</label>
+                            <div class="bg-slate-50 rounded px-3 py-2 text-slate-800">
+                                {{ $penerbangan->listBandara->lokasi }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Booking Details -->
+            <div class="bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg p-6">
+                <h3 class="text-lg font-semibold text-slate-800 mb-4 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                    </svg>
+                    Detail Pemesanan
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white rounded-lg p-4">
+                        <label class="block text-sm font-medium text-slate-600 mb-2">Jumlah Seat</label>
+                        <div class="text-2xl font-bold text-blue-600">{{ $penerbangan->seat }}</div>
+                        <span class="text-xs text-slate-500">seat</span>
+                    </div>
+                    <div class="bg-white rounded-lg p-4">
+                        <label class="block text-sm font-medium text-slate-600 mb-2">Class</label>
+                        <div class="text-2xl font-bold text-purple-600">{{ $penerbangan->class }}</div>
+                    </div>
+                    <div class="bg-white rounded-lg p-4">
+                        <label class="block text-sm font-medium text-slate-600 mb-2">Total Harga</label>
+                        <div class="text-2xl font-bold text-green-600">Rp {{ number_format($penerbangan->total, 0, ',', '.') }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex justify-center pt-6 border-t border-slate-200">
+                <a href="{{ route('history.index') }}" 
+                   class="inline-flex items-center px-6 py-3 bg-slate-600 hover:bg-slate-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    Kembali ke History
+                </a>
+            </div>
         </div>
     </div>
+</div>
 
 @endsection

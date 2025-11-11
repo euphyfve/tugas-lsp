@@ -1,0 +1,18 @@
+/* Import Google Fonts first */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Import Tailwind CSS */
+@import "tailwindcss";
+
+/* Source directives untuk Tailwind v4 - memberitahu Tailwind file mana yang perlu di-scan */
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+/* Custom base styles */
+@layer base {
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+}
